@@ -86,13 +86,6 @@ def r():
               prediction = regressor.predict(past_data)
          except Exception as e:
               return str(e)
-     #     if (prediction):
-     #          prediction_result = []
-     #          for value in prediction[0]:
-     #               if value>=0.5:
-     #                    prediction_result.append(int(np.ceil(value)))
-     #                else:
-     #                     prediction_result.append(int(np.floor(value)))
 
      num_of_prediction =1                     # num of prediction
      all_predictions = []
