@@ -9,8 +9,10 @@ graph = tf.get_default_graph()
 
 app = Flask(__name__)
 
-
 # model = tf.keras.models.load_model('todomodel.h5')
+## model will load below
+
+
 
 @app.route('/')
 def login():
@@ -28,7 +30,6 @@ def r():
      last_date = [int(str(int(day))+str(int(month))+str(int(year)))]
 
 
-     # return str(int(str(int(day))+str(int(month))+str(int(year))))
 
      Sum = []
      year = 18
