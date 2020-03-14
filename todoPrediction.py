@@ -1,39 +1,41 @@
 import numpy as np 
 from sklearn.preprocessing import MinMaxScaler 
-import tensorflow as tf
+import tensorflow
 from keras.models import load_model
-# from tensorflow.keras.models import load_model
 from flask import Flask,redirect,render_template,request
-graph = tf.get_default_graph()
+# graph = tf.get_default_graph()         #for tensorflow 1.13.1 
 
+# does'nt need to set graph as_default in tensorflow 2.0
+
+# print(tensorflow.__version__)
 
 app = Flask(__name__)
 
-# model = tf.keras.models.load_model('todomodel.h5')
 ## model will load below
-
+model_path = "/home/abdullah/Python/todomodel_Lin/todomodel.h5"
+regressor = tensorflow.keras.models.load_model(model_path)
 
 
 @app.route('/')
 def login():
-     return render_template('login1.html')
+     return render_template('index.html')
 
 
 @app.route('/model',methods=["POST"])
-def r():
+def model():
      data = dict(request.form)
-     date = data['name']
+     date = data['date']
      # 2020-10-06
      day = date[-2:]
      month = date[-5:-3]
      year = date [-8:-6]
      last_date = [int(str(int(day))+str(int(month))+str(int(year)))]
 
-
-
-     Sum = []
+     current_year = year
      year = 18
-     for years in range(2):
+     year_Range = (int(current_year)-year)+1
+     Sum = []
+     for years in range(year_Range):
           for month in range(1,13):
                if month<=7 and month!=2:
                     if (month%2)==0 :
@@ -77,16 +79,31 @@ def r():
                past_data[j].append(scale_buyed_or_not[j][k])
 
           
-          
      past_data = np.array(past_data)
      past_data = past_data.reshape(1,3,30)
 
-     with graph.as_default():
-         try:
-              regressor = tf.keras.models.load_model('todomodel.h5')
-              prediction = regressor.predict(past_data)
-         except Exception as e:
-              return str(e)
+     ##---------------------------------------##
+     #### FOR TENSORFLOW 1.13.1 #####
+
+     # graph = tensorflow.get_default_graph()   
+     # with graph.as_default():
+     #      try:
+     #           regressor = tensorflow.keras.models.load_model(model_path)
+     #           prediction = regressor.predict(past_data)
+     #      except Exception as e:
+     #           return str(e)
+     ##--------------------------------------##
+                       ## OR  ##
+     ##-----------------------------------------------##    
+     #### FOR TENSORFLOW 2.0 ######
+     
+     try:
+          # regressor = tensorflow.keras.models.load_model(model_path)
+          prediction = regressor.predict(past_data)
+     except Exception as e:
+          return str(e)
+
+     ##-----------------------------------------------##
 
      num_of_prediction =1                     # num of prediction
      all_predictions = []
@@ -119,10 +136,7 @@ def r():
           if v==1:
                result.append(k)
      
-     return (str(result))     
-
-
-
+     return render_template('pred.html',slug=result)
 
 
 

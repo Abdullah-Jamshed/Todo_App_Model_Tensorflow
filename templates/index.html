@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>todoModel</title>
+    <style>
+        body {
+            background-color: #e5e2e2;
+        }
+
+        /* .box {
+
+            margin-top: 50px;
+            border: 20px;
+            background-color: cadetblue;
+        } */
+
+        .box1 {
+            margin-left: 35em;
+            margin-top: 10em;
+            background-color: white;
+            /* flex-grow: 1; */
+            width: 600px;
+            height: 500px;
+            /* flex-shrink: 0; */
+            border-radius: 0.4rem;
+            text-align: center;
+            /* margin-left: 1.9rem; */
+            box-shadow: 0 0 25px gray;
+
+        }
+
+
+        fieldset {
+            margin-top: 50px;
+            margin-left: 30px;
+            width: 500px;
+            border: 1px solid #dcdcdc;
+            border-radius: 10px;
+            padding: 20px;
+            /* text-align: left; */
+        }
+
+        legend {
+            background-color: #efefef;
+            border: 1px solid #dcdcdc;
+            border-radius: 10px;
+            padding: 10px 20px;
+            text-align: left;
+            text-transform: uppercase;
+        }
+
+        .boxh {
+            padding-top: 2rem;
+            font-size: 1.9rem;
+            color: teal;
+            font-weight: bold;
+        }
+
+        .input1 {
+            font-size: 170%;
+            width: 300px;
+            color: #5a5854;
+            background-color: #f2f2f2;
+            border: 1px solid #bdbdbd;
+            border-radius: 5px;
+            padding: 5px 5px 5px 30px;
+            background-repeat: no-repeat;
+            background-position: 8px 9px;
+            /* display: block; */
+            margin-top: 2em;
+            margin-bottom: 10px;
+            /* margin-left: 3em; */
+            margin-bottom: 2.5em;
+        }
+
+        label {
+            font-size: 30px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .input2 {
+            font-size: large;
+            margin-bottom: 30px;
+            height: 40px;
+            width: 340px;
+            color: white;
+            background-color: teal;
+            border-radius: 5px;
+            border: 1px solid teal;
+                }
+
+        .colo{
+            color: red;
+            margin-bottom: -20px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="box1">
+        <form action="/model" class="dc" method="POST" onsubmit="check('input1')" >
+            <h1 class="boxh">Todo App Model</h1>
+            <hr>
+            <fieldset>
+                <legend>Enter Date</legend>
+                <p class="colo"></p>
+                <input class="input1" name="date" type="date" placeholder="date"><br>
+                <input class="input2" type="submit" name="submit"><br>
+            </fieldset>
+        </form>
+    </div>
+
+    <script>
+        function check(idm) {
+            var c = document.getElementsByClassName(idm);
+            var m = c[0].value
+            m = Number(m.slice(2, 4))
+            if (m <= 18) {
+                var pdom = document.getElementsByClassName("dc");
+                pdomc = pdom[0].setAttribute('action', 'javascript:')
+            // pdomc = pdom[0].childNodes[5].childNodes[3].setAttribute('action', 'javascript:')
+                pdom = pdom[0].childNodes[5].childNodes[3]
+                pdom.innerHTML = "* Invaild Date (onward from 2019)"
+                return false;
+            } else {
+                var pdom = document.getElementsByClassName("dc");
+                pdomc = pdom[0].setAttribute('action', '/model')
+                var pdom = document.getElementsByClassName("dc");
+                pdom = pdom[0].childNodes[5].childNodes[3]
+                pdom.innerHTML = ""
+
+            }
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+
+        body {
+            background-color: rgba(188, 213, 221, 0.5);
+        }
+
+        .box1 {
+            margin-left: 35em;
+            margin-top: 10em;
+            background-color: white;
+            /* flex-grow: 0; */
+            width: 600px;
+            height: fit-content;
+            /* height: 500px; */
+            /* flex-shrink: 0; */
+            border-radius: 0.4rem;
+            text-align: center;
+            /* margin-left: 1.9rem; */
+            box-shadow: 0 0 25px gray;
+            padding-bottom: 10px;
+        }
+
+        .fh {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            color: rgb(255, 255, 255);
+        }
+
+        .th {
+            background-color: rgba(108, 200, 228, 0.808);
+            border-radius: 0.4rem;
+        }
+
+        .item {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: larger;
+            }
+
+
+    </style>
+</head>
+<body>
+
+
+    <div class="box1">
+        <div class="th">
+            <h1 class="fh">Prediction</h1>
+        </div>
+            {% for i in slug %}
+            <p class="item" >{{i}}</p>
+            {% endfor %}
+        
+    </div>
+</body>
+</html>
